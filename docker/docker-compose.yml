@@ -1,0 +1,8 @@
+
+services:
+
+  pt-toolkit:
+    image: pt-toolkit:v1
+    container_name: pt-toolkit
+    stdin_open: true
+    tty: true
