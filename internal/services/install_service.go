@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"github.com/SanjanaDhumale/pt-toolkit/internal/config"
 )
 
 func RunInstall() {
@@ -16,9 +17,9 @@ func RunInstall() {
 		"docker",
 		"build",
 		"-f",
-		"docker/Dockerfile",
+		config.AppConfig.Docker.Dockerfile,
 		"-t",
-		"pt-toolkit:v1",
+		config.AppConfig.Docker.Image,
 		".",
 	)
 

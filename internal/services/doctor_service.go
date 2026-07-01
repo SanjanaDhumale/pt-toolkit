@@ -5,6 +5,8 @@ import (
 	"os"
 	"os/exec"
 	"github.com/SanjanaDhumale/pt-toolkit/internal/system"
+	"github.com/SanjanaDhumale/pt-toolkit/internal/config"
+	
 )
 
 func RunDoctor() {
@@ -42,7 +44,7 @@ func RunStart() {
     "docker",
     "compose",
     "-f",
-    "docker/docker-compose.yml",
+    config.AppConfig.Docker.ComposeFile,
     "up",
 )
 

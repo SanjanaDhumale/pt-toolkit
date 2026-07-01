@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"github.com/SanjanaDhumale/pt-toolkit/internal/config"
 )
 
 func RunStop() {
@@ -16,7 +17,7 @@ func RunStop() {
 		"docker",
 		"compose",
 		"-f",
-		"docker/docker-compose.yml",
+		config.AppConfig.Docker.ComposeFile,
 		"down",
 	)
 

@@ -1,0 +1,16 @@
+toolkit:
+  name: "PT Toolkit"
+  version: "0.1.0"
+
+docker:
+  image: "pt-toolkit:v1"
+  dockerfile: "docker/Dockerfile"
+  compose_file: "docker/docker-compose.yml"
+
+workspace:
+  reports: "./reports"
+  logs: "./logs"
+
+plugins:
+  jmeter: true
+  k6: false

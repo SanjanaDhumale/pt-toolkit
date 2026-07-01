@@ -1,11 +1,11 @@
-/*
-Copyright © 2026 NAME HERE <EMAIL ADDRESS>
-
-*/
 package main
 
-import "github.com/SanjanaDhumale/pt-toolkit/cmd"
+import (
+	"github.com/SanjanaDhumale/pt-toolkit/cmd"
+	"github.com/SanjanaDhumale/pt-toolkit/internal/config"
+)
 
 func main() {
+	config.Init()
 	cmd.Execute()
 }
