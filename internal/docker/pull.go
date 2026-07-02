@@ -2,20 +2,29 @@ package docker
 
 import (
 	"fmt"
+	"os"
 	"os/exec"
 )
 
-func PullImage(image string) error {
+func PullImage(image string) {
 
-	fmt.Println("Pulling image:", image)
+	cmd := exec.Command(
+		"docker",
+		"pull",
+		image,
+	)
 
-	cmd := exec.Command("docker", "pull", image)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
 
-	output, err := cmd.CombinedOutput()
+	err := cmd.Run()
 
 	if err != nil {
-		return fmt.Errorf("%s", output)
+
+		fmt.Println("❌ Failed:", image)
+
+		return
 	}
 
-	return nil
+	fmt.Println("✓ Downloaded:", image)
 }

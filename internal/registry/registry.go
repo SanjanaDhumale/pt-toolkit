@@ -1,10 +1,12 @@
 package registry
 
 type Service struct {
-	Name        string
-	Container   string
-	Image       string
-	Description string
+    Name        string
+    Container   string
+    Image       string
+    Description string
+    Enabled     bool
+    Ports       []string
 }
 
 var ToolRegistry = map[string][]Service{
