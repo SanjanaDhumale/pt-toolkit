@@ -1,0 +1,4 @@
+2026-07-02 15:48:39,301 INFO o.j.r.PluginManagerCMD: Command is: status
+2026-07-02 15:48:39,349 WARN o.j.r.PluginManager: Found JAR conflict: C:\Users\Admin\Downloads\apache-jmeter-5.6.3\apache-jmeter-5.6.3\lib\ext\jmeter-plugins-manager-1.12.jar and C:\Users\Admin\Downloads\apache-jmeter-5.6.3\apache-jmeter-5.6.3\lib\ext\jmeter-plugins-manager-1.11.jar
+2026-07-02 15:48:39,406 INFO o.j.r.JARSourceHTTP: Requesting https://jmeter-plugins.org/repo/?installID=jenkins-6a9b529dcb3b65821490a26c52ae619d-nongui
+2026-07-02 15:48:42,870 INFO o.j.r.PluginManager: Plugins Status: [jpgc-graphs-basic=2.0, jpgc-graphs-additional=2.0, jpgc-casutg=3.1.1, jpgc-plugins-manager=1.11, jmeter-prometheus=0.6.0, jmeter-core=5.6.3, jmeter-ftp=5.6.3, jmeter-http=5.6.3, jmeter-jdbc=5.6.3, jmeter-jms=5.6.3, jmeter-junit=5.6.3, jmeter-java=5.6.3, jmeter-ldap=5.6.3, jmeter-mail=5.6.3, jmeter-mongodb=5.6.3, jmeter-native=5.6.3, jmeter-tcp=5.6.3, jmeter-components=5.6.3]
