@@ -1,0 +1,12 @@
+project:
+  name: "PT Toolkit"
+
+tools:
+  jmeter: true
+  k6: false
+  selenium: false
+
+monitoring:
+  grafana: false
+  prometheus: false
+  influxdb: false

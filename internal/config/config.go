@@ -17,8 +17,15 @@ type Config struct {
 		Logs    string `yaml:"logs"`
 	} `yaml:"workspace"`
 
-	Plugins struct {
-		JMeter bool `yaml:"jmeter"`
-		K6      bool `yaml:"k6"`
-	} `yaml:"plugins"`
+	Tools struct {
+		JMeter   bool `yaml:"jmeter"`
+		K6       bool `yaml:"k6"`
+		Selenium bool `yaml:"selenium"`
+	} `yaml:"tools"`
+
+	Monitoring struct {
+		Grafana   bool `yaml:"grafana"`
+		Prometheus bool `yaml:"prometheus"`
+		InfluxDB   bool `yaml:"influxdb"`
+	} `yaml:"monitoring"`
 }

@@ -2,59 +2,55 @@ package services
 
 import (
 	"fmt"
-	"os"
-	"os/exec"
-	"github.com/SanjanaDhumale/pt-toolkit/internal/system"
+
 	"github.com/SanjanaDhumale/pt-toolkit/internal/config"
-	
+	"github.com/SanjanaDhumale/pt-toolkit/internal/system"
 )
 
 func RunDoctor() {
 
-	fmt.Println("======================================")
-	fmt.Println(" PT Toolkit Environment Health Check")
-	fmt.Println("======================================")
+	fmt.Println("==========================================")
+	fmt.Println("PT Toolkit Environment Health Check")
+	fmt.Println("==========================================")
 
-	goVersion, _ := system.CheckGo()
-	fmt.Println(goVersion)
+	fmt.Printf("Toolkit Version : %s\n", config.AppConfig.Toolkit.Version)
+	fmt.Printf("Docker Image    : %s\n\n", config.AppConfig.Docker.Image)
 
-	dockerVersion, _ := system.CheckDocker()
-	fmt.Println(dockerVersion)
+	checks := []struct {
+		Name string
+		Run  func() (string, error)
+	}{
+		{"Go", system.CheckGo},
+		{"Docker", system.CheckDocker},
+		{"Docker Compose", system.CheckDockerCompose},
+		{"Java", system.CheckJava},
+		{"Python", system.CheckPython},
+		{"Git", system.CheckGit},
+	}
 
-	composeVersion, _ := system.CheckDockerCompose()
-	fmt.Println(composeVersion)
+	for _, check := range checks {
 
-	javaVersion, _ := system.CheckJava()
-	fmt.Println(javaVersion)
+		version, err := check.Run()
 
-	pythonVersion, _ := system.CheckPython()
-	fmt.Println(pythonVersion)
+		if err != nil {
+			fmt.Printf("❌ %-18s Not Installed\n", check.Name)
+			continue
+		}
 
-	gitVersion, _ := system.CheckGit()
-	fmt.Println(gitVersion)
-}
+		fmt.Printf("✅ %-18s %s\n", check.Name, version)
+	}
 
-func RunStart() {
+	fmt.Println("\n==========================================")
+	fmt.Println("Environment Check Completed")
+	fmt.Println("==========================================")
 
-	fmt.Println("====================================")
-	fmt.Println("Starting PT Toolkit...")
-	fmt.Println("====================================")
+	fmt.Println()
 
-	cmd := exec.Command(
-    "docker",
-    "compose",
-    "-f",
-    config.AppConfig.Docker.ComposeFile,
-    "up",
-)
-
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	cmd.Stdin = os.Stdin
-
-	err := cmd.Run()
-
-	if err != nil {
-		fmt.Println("Error:", err)
+	if system.IsDockerInstalled() {
+		fmt.Println("✅ Docker Status : READY")
+	} else {
+		fmt.Println("❌ Docker Status : NOT INSTALLED")
+		fmt.Println("Please install Docker Desktop before continuing.")
 	}
 }
+

@@ -45,3 +45,8 @@ func CheckPython() (string, error) {
 func CheckGit() (string, error) {
 	return RunCommand("git", "--version")
 }
+
+func IsDockerInstalled() bool {
+	_, err := CheckDocker()
+	return err == nil
+}

@@ -11,6 +11,12 @@ workspace:
   reports: "./reports"
   logs: "./logs"
 
-plugins:
+tools:
   jmeter: true
   k6: false
+  selenium: false
+
+monitoring:
+  grafana: false
+  prometheus: false
+  influxdb: false
