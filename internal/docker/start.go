@@ -5,7 +5,16 @@ import (
 	"os/exec"
 )
 
+
+
 func StartContainer(name, image string) error {
+
+	if IsRunning(name) {
+
+		fmt.Println("✓", name, "already running")
+
+		return nil
+	}
 
 	fmt.Println("Starting:", name)
 
@@ -18,11 +27,13 @@ func StartContainer(name, image string) error {
 		image,
 	)
 
-	out, err := cmd.CombinedOutput()
+	output, err := cmd.CombinedOutput()
 
 	if err != nil {
-		return fmt.Errorf(string(out))
+		return fmt.Errorf("%s", output)
 	}
+
+	fmt.Println("✓", name, "started")
 
 	return nil
 }

@@ -95,23 +95,17 @@ func RunStart(tool string) {
 	fmt.Println("Starting PT Toolkit...")
 	fmt.Println("===================================")
 
-	cmd := exec.Command(
-		"docker",
-		"compose",
-		"-f",
-		config.AppConfig.Docker.ComposeFile,
-		"up",
-	)
+	err = StartRequiredContainers(tool)
 
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	cmd.Stdin = os.Stdin
-
-	if err := cmd.Run(); err != nil {
-		fmt.Println("❌ Failed to start PT Toolkit:", err)
+	if err != nil {
+		fmt.Println(err)
 		return
 	}
+
+	fmt.Println()
+	fmt.Println("✅ Environment Ready")
 }
+
 
 // Stop Docker Environment
 func RunStop() {
