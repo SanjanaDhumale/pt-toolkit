@@ -18,7 +18,17 @@ var listStackCmd = &cobra.Command{
 	},
 }
 
+var installStackCmd = &cobra.Command{
+	Use:   "install [stack]",
+	Short: "Install a Performance Engineering stack",
+	Args:  cobra.ExactArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
+		services.InstallStack(args[0])
+	},
+}
+
 func init() {
 	stackCmd.AddCommand(listStackCmd)
 	rootCmd.AddCommand(stackCmd)
+	stackCmd.AddCommand(installStackCmd)
 }
