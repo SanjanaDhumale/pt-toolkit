@@ -1,39 +1,47 @@
 package docker
 
-import (
-	"fmt"
-	"os/exec"
-)
+import "fmt"
 
+func StartMonitoringStack(network string) error {
 
-
-func StartContainer(name, image string) error {
-
-	if IsRunning(name) {
-
-		fmt.Println("✓", name, "already running")
-
-		return nil
+	if err := RunContainer(
+		"pt-influxdb",
+		"influxdb:2.7",
+		network,
+		"8086:8086",
+	); err != nil {
+		return err
 	}
 
-	fmt.Println("Starting:", name)
-
-	cmd := exec.Command(
-		"docker",
-		"run",
-		"-d",
-		"--name",
-		name,
-		image,
-	)
-
-	output, err := cmd.CombinedOutput()
-
-	if err != nil {
-		return fmt.Errorf("%s", output)
+	if err := RunContainer(
+		"pt-prometheus",
+		"prom/prometheus:latest",
+		network,
+		"9090:9090",
+	); err != nil {
+		return err
 	}
 
-	fmt.Println("✓", name, "started")
+	if err := RunContainer(
+		"pt-grafana",
+		"grafana/grafana:latest",
+		network,
+		"3000:3000",
+	); err != nil {
+		return err
+	}
+
+	if !IsContainerRunning("pt-grafana") {
+		return fmt.Errorf("Grafana failed to start")
+	}
+
+	if !IsContainerRunning("pt-prometheus") {
+		return fmt.Errorf("Prometheus failed to start")
+	}
+
+	if !IsContainerRunning("pt-influxdb") {
+		return fmt.Errorf("InfluxDB failed to start")
+	}
 
 	return nil
 }

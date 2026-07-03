@@ -5,6 +5,7 @@ import (
 	"github.com/SanjanaDhumale/pt-toolkit/internal/stack"
 	"github.com/SanjanaDhumale/pt-toolkit/internal/ui"
 	"github.com/SanjanaDhumale/pt-toolkit/internal/docker"
+	
 )
 
 func Install(stackName string) error {
@@ -51,7 +52,18 @@ func Install(stackName string) error {
 		}
 	}
 
-	ui.Success(s.Name + " Installed")
+	if stackName == "monitoring" {
+
+		ui.Step("Starting Monitoring Containers")
+
+		if err := docker.StartMonitoringStack(s.Network); err != nil {
+			return err
+		}
+
+		ui.Success("Monitoring stack running")
+	}
+
+	// ui.Success(s.Name + " Installed")
 
 	return nil
 }
