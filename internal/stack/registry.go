@@ -8,6 +8,8 @@ var Registry = map[string]Stack{
 		Name: "Protocol Testing",
 		Components: []component.Component{
 			component.Java{},
+			component.Docker{},
+			component.JMeter{},
 		},
 	},
 

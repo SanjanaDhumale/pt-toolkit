@@ -15,25 +15,31 @@ func Install(stackName string) error {
 
 	ui.Header("Installing " + s.Name)
 
-	// TODO:
-	// Later, s.Components will contain actual Component implementations.
-	// For now, we'll manually execute the Java component.
-	_ = s
+	for _, c := range s.Components {
 
-	java := component.Java{}
+		result := c.Check()
 
-	result := java.Check()
+		switch result.Status {
 
-	switch result.Status {
+		case component.Installed:
 
-	case component.Installed:
-		ui.Success(result.Message)
+			ui.Success(result.Message)
 
-	case component.NotInstalled:
-		ui.Warning(result.Message)
+		case component.NotInstalled:
 
-		install := java.Install()
-		ui.Info(install.Message)
+			ui.Warning(result.Message)
+
+			install := c.Install()
+
+			if install.Status == component.Installed {
+
+				ui.Success(install.Message)
+
+			} else {
+
+				ui.Error(install.Message)
+			}
+		}
 	}
 
 	ui.Success(s.Name + " Installed")
