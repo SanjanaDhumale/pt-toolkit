@@ -1,10 +1,6 @@
 package docker
 
-import (
-	"fmt"
-	"os"
-	"os/exec"
-)
+import "os/exec"
 
 func PullImage(image string) error {
 
@@ -14,14 +10,5 @@ func PullImage(image string) error {
 		image,
 	)
 
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-
-	if err := cmd.Run(); err != nil {
-		return err
-	}
-
-	fmt.Println("✓", image, "downloaded")
-
-	return nil
+	return cmd.Run()
 }

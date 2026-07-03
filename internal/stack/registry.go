@@ -15,6 +15,17 @@ var Registry = map[string]Stack{
 
 	"monitoring": {
 		Name: "Monitoring",
-		Components: []component.Component{},
+		Components: []component.Component{
+			component.Grafana{},
+			component.Prometheus{},
+			component.InfluxDB{},
+		},
+	},
+
+	"browser": {
+		Name: "Browser Automation",
+		Components: []component.Component{
+			component.Selenium{},
+		},
 	},
 }
