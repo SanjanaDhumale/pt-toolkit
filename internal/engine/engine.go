@@ -4,6 +4,7 @@ import (
 	"github.com/SanjanaDhumale/pt-toolkit/internal/component"
 	"github.com/SanjanaDhumale/pt-toolkit/internal/stack"
 	"github.com/SanjanaDhumale/pt-toolkit/internal/ui"
+	"github.com/SanjanaDhumale/pt-toolkit/internal/docker"
 )
 
 func Install(stackName string) error {
@@ -14,6 +15,14 @@ func Install(stackName string) error {
 	}
 
 	ui.Header("Installing " + s.Name)
+
+	ui.Step("Creating Docker Network")
+
+	if err := docker.CreateNetwork(s.Network); err != nil {
+		return err
+	}
+
+	ui.Success(s.Network + " ready")
 
 	for _, c := range s.Components {
 

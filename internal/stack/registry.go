@@ -6,6 +6,7 @@ var Registry = map[string]Stack{
 
 	"protocol": {
 		Name: "Protocol Testing",
+		Network: "pt-protocol-network",
 		Components: []component.Component{
 			component.Java{},
 			component.Docker{},
@@ -15,6 +16,7 @@ var Registry = map[string]Stack{
 
 	"monitoring": {
 		Name: "Monitoring",
+		Network: "pt-monitoring-network",
 		Components: []component.Component{
 			component.Grafana{},
 			component.Prometheus{},
@@ -24,6 +26,7 @@ var Registry = map[string]Stack{
 
 	"browser": {
 		Name: "Browser Automation",
+		Network: "pt-browser-network",
 		Components: []component.Component{
 			component.Selenium{},
 		},
