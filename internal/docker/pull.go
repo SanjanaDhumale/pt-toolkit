@@ -6,7 +6,7 @@ import (
 	"os/exec"
 )
 
-func PullImage(image string) {
+func PullImage(image string) error {
 
 	cmd := exec.Command(
 		"docker",
@@ -17,14 +17,11 @@ func PullImage(image string) {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
-	err := cmd.Run()
-
-	if err != nil {
-
-		fmt.Println("❌ Failed:", image)
-
-		return
+	if err := cmd.Run(); err != nil {
+		return err
 	}
 
-	fmt.Println("✓ Downloaded:", image)
+	fmt.Println("✓", image, "downloaded")
+
+	return nil
 }

@@ -14,7 +14,11 @@ var requiredImages = []string{
 	"selenium/standalone-chrome:latest",
 }
 
-func CheckImages() {
+func InstallImages() {
+
+	fmt.Println()
+	fmt.Println("Checking Docker Images")
+	fmt.Println()
 
 	for _, image := range requiredImages {
 
@@ -24,7 +28,7 @@ func CheckImages() {
 
 		} else {
 
-			fmt.Println("⬇ Pulling", image)
+			fmt.Println("⬇ Downloading", image)
 
 			dockerengine.PullImage(image)
 		}

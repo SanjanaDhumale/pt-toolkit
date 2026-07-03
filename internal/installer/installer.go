@@ -4,14 +4,15 @@ import "fmt"
 
 func Install() {
 
-	fmt.Println("======================================")
-	fmt.Println("PT Toolkit Installer")
-	fmt.Println("======================================")
+	fmt.Println("========================================")
+	fmt.Println(" PT Toolkit Installer")
+	fmt.Println("========================================")
 
-	fmt.Println("✓ Docker Check")
-	fmt.Println("✓ Image Check")
-	fmt.Println("✓ Tool Check")
+	CheckDocker()
+
+	InstallImages()
 
 	fmt.Println()
-	fmt.Println("PT Toolkit Ready")
+
+	fmt.Println("Installation Completed")
 }

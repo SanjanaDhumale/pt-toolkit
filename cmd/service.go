@@ -35,10 +35,20 @@ var statusServiceCmd = &cobra.Command{
 	},
 }
 
+var stopServiceCmd = &cobra.Command{
+	Use:   "stop [service]",
+	Short: "Stop a service",
+	Args:  cobra.ExactArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
+		services.StopService(args[0])
+	},
+}
+
 func init() {
 	serviceCmd.AddCommand(listServiceCmd)
 	rootCmd.AddCommand(serviceCmd)
 	serviceCmd.AddCommand(startServiceCmd)
 	serviceCmd.AddCommand(statusServiceCmd)
+	serviceCmd.AddCommand(stopServiceCmd)
 }
 
