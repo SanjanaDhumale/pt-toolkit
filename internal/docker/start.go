@@ -4,6 +4,10 @@ import "fmt"
 
 func StartMonitoringStack(network string) error {
 
+	CreateVolume("pt-grafana-data")
+	CreateVolume("pt-prometheus-data")
+	CreateVolume("pt-influxdb-data")
+
 	if err := RunContainer(
 		"pt-influxdb",
 		"influxdb:2.7",
