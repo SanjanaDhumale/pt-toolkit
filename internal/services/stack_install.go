@@ -3,27 +3,20 @@ package services
 import (
 	"fmt"
 
-	"github.com/SanjanaDhumale/pt-toolkit/internal/stack"
+	"github.com/SanjanaDhumale/pt-toolkit/internal/installer"
 )
 
-func InstallStack(name string) {
+func InstallStack(name string) error {
 
-	s, err := stack.Find(name)
+	switch name {
 
-	if err != nil {
-		fmt.Println(err)
-		return
+	case "protocol":
+		return installer.InstallProtocolStack()
+
+	case "monitoring":
+		return installer.InstallMonitoringStack()
+
+	default:
+		return fmt.Errorf("unknown stack: %s", name)
 	}
-
-	fmt.Println("========================================")
-	fmt.Println("Installing:", s.Name)
-	fmt.Println("========================================")
-
-	for _, c := range s.Components {
-
-		fmt.Println("Checking:", c.Name)
-	}
-
-	fmt.Println()
-	fmt.Println("✓ Stack Ready")
 }

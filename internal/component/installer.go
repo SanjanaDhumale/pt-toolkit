@@ -4,27 +4,33 @@ import (
 	"github.com/SanjanaDhumale/pt-toolkit/internal/ui"
 )
 
-func Install(c Component) error {
+func Install(c Component) Result {
 
 	ui.Step("Checking " + c.Name())
 
-	if err := c.Check(); err == nil {
+	result := c.Check()
 
-		ui.Success(c.Name() + " already installed")
+	if result.Status == Installed {
 
-		return nil
+		ui.Success(result.Message)
+
+		return result
 	}
+
+	ui.Warning(result.Message)
 
 	ui.Step("Installing " + c.Name())
 
-	if err := c.Install(); err != nil {
+	install := c.Install()
 
-		ui.Error(err.Error())
+	if install.Status == Installed {
 
-		return err
+		ui.Success(install.Message)
+
+	} else {
+
+		ui.Error(install.Message)
 	}
 
-	ui.Success(c.Name() + " installed")
-
-	return nil
+	return install
 }

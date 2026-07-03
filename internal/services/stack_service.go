@@ -19,13 +19,14 @@ func ListStacks() {
 
 		fmt.Println("------------------------------------------")
 		fmt.Println("📦", s.Name)
-		fmt.Println("Version :", s.Version)
 		fmt.Println()
 
 		fmt.Println("Components")
 
 		for _, c := range s.Components {
-			fmt.Println("  ✓", c.Name)
+			fmt.Println("  ✓", c.Name())
 		}
+
+		fmt.Println()
 	}
 }
