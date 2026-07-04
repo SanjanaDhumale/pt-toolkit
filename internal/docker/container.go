@@ -25,7 +25,12 @@ func RunContainer(
 ) error {
 
 	if ContainerExists(name) {
-		return nil
+
+		if ContainerRunning(name) {
+			return nil
+		}
+
+		return StartExistingContainer(name)
 	}
 
 	args := []string{
@@ -52,4 +57,24 @@ func RunContainer(
 
 func StartContainer(name, image string) error {
 	return RunContainer(name, image, "bridge", nil)
+}
+
+
+func ContainerRunning(name string) bool {
+
+	cmd := exec.Command(
+		"docker",
+		"inspect",
+		"-f",
+		"{{.State.Running}}",
+		name,
+	)
+
+	out, err := cmd.Output()
+
+	if err != nil {
+		return false
+	}
+
+	return string(out) == "true\n"
 }
