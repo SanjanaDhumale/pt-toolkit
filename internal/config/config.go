@@ -18,14 +18,49 @@ type Config struct {
 	} `yaml:"workspace"`
 
 	Tools struct {
-		JMeter   bool `yaml:"jmeter"`
-		K6       bool `yaml:"k6"`
-		Selenium bool `yaml:"selenium"`
-	} `yaml:"tools"`
 
+		JMeter struct {
+			Enabled   bool
+			Image     string
+			Container string
+			Version   string
+		}
+
+		K6 struct {
+			Enabled bool
+			Image   string
+		}
+
+		Selenium struct {
+			Enabled bool
+			Image   string
+		}
+	}
 	Monitoring struct {
-		Grafana   bool `yaml:"grafana"`
-		Prometheus bool `yaml:"prometheus"`
-		InfluxDB   bool `yaml:"influxdb"`
+		Network string `yaml:"network"`
+
+		Grafana struct {
+			Enabled   bool   `yaml:"enabled"`
+			Image     string `yaml:"image"`
+			Container string `yaml:"container"`
+			Port      string `yaml:"port"`
+			Volume    string `yaml:"volume"`
+		} `yaml:"grafana"`
+
+		Prometheus struct {
+			Enabled   bool   `yaml:"enabled"`
+			Image     string `yaml:"image"`
+			Container string `yaml:"container"`
+			Port      string `yaml:"port"`
+			Volume    string `yaml:"volume"`
+		} `yaml:"prometheus"`
+
+		InfluxDB struct {
+			Enabled   bool   `yaml:"enabled"`
+			Image     string `yaml:"image"`
+			Container string `yaml:"container"`
+			Port      string `yaml:"port"`
+			Volume    string `yaml:"volume"`
+		} `yaml:"influxdb"`
 	} `yaml:"monitoring"`
 }
