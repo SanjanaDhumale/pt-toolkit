@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 func CreateWorkspace(projectName string) error {
@@ -137,4 +138,87 @@ func ListWorkspaces() {
 	}
 
 	fmt.Println()
+}
+
+
+func UseWorkspace(name string) error {
+
+	root := filepath.Join("workspace", name)
+
+	// Check if workspace exists
+	if _, err := os.Stat(root); os.IsNotExist(err) {
+		return fmt.Errorf("workspace '%s' not found", name)
+	}
+
+	err := os.MkdirAll("config", 0755)
+	if err != nil {
+		return err
+	}
+
+	file := filepath.Join("config", "current-workspace.txt")
+
+	err = os.WriteFile(file, []byte(name), 0644)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println()
+	fmt.Println("Current Workspace :", name)
+	fmt.Println()
+
+	return nil
+}
+
+
+func countFiles(folder string) int {
+
+	entries, err := os.ReadDir(folder)
+
+	if err != nil {
+		return 0
+	}
+
+	count := 0
+
+	for _, e := range entries {
+
+		if !e.IsDir() {
+			count++
+		}
+	}
+
+	return count
+}
+
+
+func Info() error {
+
+	data, err := os.ReadFile(filepath.Join("config", "current-workspace.txt"))
+
+	if err != nil {
+		return fmt.Errorf("no workspace selected")
+	}
+
+	name := strings.TrimSpace(string(data))
+
+	root := filepath.Join("workspace", name)
+
+	fmt.Println()
+	fmt.Println("====================================")
+	fmt.Println(" Current Workspace")
+	fmt.Println("====================================")
+	fmt.Println()
+
+	fmt.Println("Name      :", name)
+	fmt.Println("Location  :", root)
+	fmt.Println()
+
+	fmt.Println("Scripts   :", countFiles(filepath.Join(root, "scripts", "jmeter")))
+	fmt.Println("Reports   :", countFiles(filepath.Join(root, "reports")))
+	fmt.Println("Logs      :", countFiles(filepath.Join(root, "logs")))
+	fmt.Println("Data Files:", countFiles(filepath.Join(root, "data", "csv")))
+
+	fmt.Println()
+
+	return nil
 }

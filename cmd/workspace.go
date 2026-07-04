@@ -30,11 +30,34 @@ var workspaceListCmd = &cobra.Command{
 	},
 }
 
+var workspaceUseCmd = &cobra.Command{
+	Use:   "use [workspace]",
+	Short: "Set active workspace",
+	Args:  cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+
+		return workspace.UseWorkspace(args[0])
+
+	},
+}
+
+
+var workspaceInfoCmd = &cobra.Command{
+	Use:   "info",
+	Short: "Show current workspace information",
+	RunE: func(cmd *cobra.Command, args []string) error {
+
+		return workspace.Info()
+
+	},
+}
+
 func init() {
 
 	rootCmd.AddCommand(workspaceCmd)
-
+	
 	workspaceCmd.AddCommand(workspaceCreateCmd)
-
 	workspaceCmd.AddCommand(workspaceListCmd)
+	workspaceCmd.AddCommand(workspaceUseCmd)
+	workspaceCmd.AddCommand(workspaceInfoCmd)
 }
