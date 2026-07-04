@@ -16,7 +16,13 @@ func ContainerExists(name string) bool {
 	return cmd.Run() == nil
 }
 
-func RunContainer(name, image, network string, ports ...string) error {
+func RunContainer(
+	name string,
+	image string,
+	network string,
+	volumes []string,
+	ports ...string,
+) error {
 
 	if ContainerExists(name) {
 		return nil
@@ -27,6 +33,10 @@ func RunContainer(name, image, network string, ports ...string) error {
 		"-d",
 		"--name", name,
 		"--network", network,
+	}
+
+	for _, v := range volumes {
+		args = append(args, "-v", v)
 	}
 
 	for _, p := range ports {
@@ -40,12 +50,6 @@ func RunContainer(name, image, network string, ports ...string) error {
 	return cmd.Run()
 }
 
-// --------------------------------------------------------------------
-// Backward Compatibility
-// Old service commands still call StartContainer().
-// This wrapper lets them continue working until we migrate completely.
-// --------------------------------------------------------------------
-
 func StartContainer(name, image string) error {
-	return RunContainer(name, image, "bridge")
+	return RunContainer(name, image, "bridge", nil)
 }

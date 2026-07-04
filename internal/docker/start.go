@@ -12,6 +12,9 @@ func StartMonitoringStack(network string) error {
 		"pt-influxdb",
 		"influxdb:2.7",
 		network,
+		[]string{
+			"pt-influxdb-data:/var/lib/influxdb2",
+		},
 		"8086:8086",
 	); err != nil {
 		return err
@@ -21,6 +24,9 @@ func StartMonitoringStack(network string) error {
 		"pt-prometheus",
 		"prom/prometheus:latest",
 		network,
+		[]string{
+			"pt-prometheus-data:/prometheus",
+		},
 		"9090:9090",
 	); err != nil {
 		return err
@@ -30,6 +36,9 @@ func StartMonitoringStack(network string) error {
 		"pt-grafana",
 		"grafana/grafana:latest",
 		network,
+		[]string{
+			"pt-grafana-data:/var/lib/grafana",
+		},
 		"3000:3000",
 	); err != nil {
 		return err
