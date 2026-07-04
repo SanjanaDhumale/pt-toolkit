@@ -8,6 +8,11 @@ func StartMonitoringStack(network string) error {
 	CreateVolume("pt-prometheus-data")
 	CreateVolume("pt-influxdb-data")
 
+	// InfluxDB
+	if err := EnsureImage("influxdb:2.7"); err != nil {
+		return err
+	}
+
 	if err := RunContainer(
 		"pt-influxdb",
 		"influxdb:2.7",
@@ -17,6 +22,11 @@ func StartMonitoringStack(network string) error {
 		},
 		"8086:8086",
 	); err != nil {
+		return err
+	}
+
+	// Prometheus
+	if err := EnsureImage("prom/prometheus:latest"); err != nil {
 		return err
 	}
 
@@ -32,6 +42,11 @@ func StartMonitoringStack(network string) error {
 		return err
 	}
 
+	// Grafana
+	if err := EnsureImage("grafana/grafana:latest"); err != nil {
+		return err
+	}
+
 	if err := RunContainer(
 		"pt-grafana",
 		"grafana/grafana:latest",
@@ -44,6 +59,7 @@ func StartMonitoringStack(network string) error {
 		return err
 	}
 
+	// Health Check
 	if !IsContainerRunning("pt-grafana") {
 		return fmt.Errorf("Grafana failed to start")
 	}
