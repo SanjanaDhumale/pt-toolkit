@@ -20,21 +20,21 @@ type Config struct {
 	Tools struct {
 
 		JMeter struct {
-			Enabled   bool
-			Image     string
-			Container string
-			Version   string
-		}
+			Enabled   bool   `yaml:"enabled"`
+			Image     string `yaml:"image"`
+			Container string `yaml:"container"`
+			Version   string `yaml:"version"`
+		} `yaml:"jmeter"`
 
 		K6 struct {
-			Enabled bool
-			Image   string
-		}
+			Enabled bool   `yaml:"enabled"`
+			Image   string `yaml:"image"`
+		} `yaml:"k6"`
 
 		Selenium struct {
-			Enabled bool
-			Image   string
-		}
+			Enabled bool   `yaml:"enabled"`
+			Image   string `yaml:"image"`
+		} `yaml:"selenium"`
 	}
 	Monitoring struct {
 		Network string `yaml:"network"`

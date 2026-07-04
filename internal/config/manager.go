@@ -2,13 +2,16 @@ package config
 
 import "log"
 
-var AppConfig *Config
+var AppConfig Config
 
 func Init() {
-	var err error
 
-	AppConfig, err = LoadConfig("configs/toolkit.yaml")
+	cfg, err := Load()
+
 	if err != nil {
-		log.Fatal("Failed to load configuration:", err)
+
+		log.Fatal(err)
 	}
+
+	AppConfig = cfg
 }

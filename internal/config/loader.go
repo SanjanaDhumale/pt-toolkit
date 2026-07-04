@@ -2,23 +2,24 @@ package config
 
 import (
 	"os"
+	"path/filepath"
 
 	"gopkg.in/yaml.v3"
 )
 
-func LoadConfig(path string) (*Config, error) {
-
-	data, err := os.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
+func Load() (Config, error) {
 
 	var cfg Config
 
-	err = yaml.Unmarshal(data, &cfg)
+	file := filepath.Join("config", "config.yaml")
+
+	data, err := os.ReadFile(file)
+
 	if err != nil {
-		return nil, err
+		return cfg, err
 	}
 
-	return &cfg, nil
+	err = yaml.Unmarshal(data, &cfg)
+
+	return cfg, err
 }

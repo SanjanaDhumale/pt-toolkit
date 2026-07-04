@@ -1,6 +1,10 @@
 package installer
 
-import "fmt"
+import(
+	"fmt"
+	"github.com/SanjanaDhumale/pt-toolkit/internal/config"
+)
+
 
 func Install() {
 
@@ -9,6 +13,14 @@ func Install() {
 	InstallImages()
 
 	CreateFolders()
+
+	cfg := config.Default()
+
+	err := config.Save(cfg)
+
+	if err != nil {
+		return
+	}
 
 	CreateConfig()
 
