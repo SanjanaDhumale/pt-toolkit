@@ -1,0 +1,42 @@
+toolkit:
+    name: PT Toolkit
+    version: 1.0.0
+docker:
+    image: pt-toolkit
+    dockerfile: Dockerfile
+    compose_file: docker-compose.yml
+workspace:
+    reports: reports
+    logs: logs
+tools:
+    jmeter:
+        enabled: true
+        image: pt-jmeter:v1
+        container: pt-jmeter
+        version: 5.6.3
+    k6:
+        enabled: true
+        image: grafana/k6:latest
+    selenium:
+        enabled: true
+        image: selenium/standalone-chrome:latest
+monitoring:
+    network: pt-monitoring-network
+    grafana:
+        enabled: true
+        image: grafana/grafana:latest
+        container: pt-grafana
+        port: 3000:3000
+        volume: pt-grafana-data
+    prometheus:
+        enabled: true
+        image: prom/prometheus:latest
+        container: pt-prometheus
+        port: 9090:9090
+        volume: pt-prometheus-data
+    influxdb:
+        enabled: true
+        image: influxdb:2.7
+        container: pt-influxdb
+        port: 8086:8086
+        volume: pt-influxdb-data

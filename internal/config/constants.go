@@ -8,6 +8,6 @@ const (
 
 	Author = "Sanjana Dhumale"
 
-	ConfigFile = "configs/toolkit.yaml"
+	ConfigFile = "config/config.yaml"
 
 )

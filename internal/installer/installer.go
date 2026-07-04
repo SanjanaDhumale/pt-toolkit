@@ -1,10 +1,10 @@
 package installer
 
-import(
+import (
 	"fmt"
+
 	"github.com/SanjanaDhumale/pt-toolkit/internal/config"
 )
-
 
 func Install() {
 
@@ -16,15 +16,11 @@ func Install() {
 
 	cfg := config.Default()
 
-	err := config.Save(cfg)
-
-	if err != nil {
+	if err := config.Save(cfg); err != nil {
+		fmt.Println(err)
 		return
 	}
 
-	CreateConfig()
-
 	fmt.Println()
-
 	fmt.Println("✓ Installation Completed")
 }
