@@ -21,7 +21,7 @@ var toolList = []Tool{
 	{"Docker", "docker", "", false},
 	{"Docker Compose", "docker", "", false},
 
-	{"JMeter", "", "pt-jmeter:v1", true},
+	{"JMeter", "", "pt-jmeter-enterprise:v1", true},
 	{"Grafana", "", "grafana/grafana:latest", true},
 	{"Prometheus", "", "prom/prometheus:latest", true},
 	{"InfluxDB", "", "influxdb:2.7", true},

@@ -1,0 +1,8 @@
+jpgc-casutg
+jpgc-functions
+jpgc-standard
+jpgc-json
+jpgc-cmd
+jpgc-dummy
+jpgc-graphs-basic
+jpgc-graphs-additional

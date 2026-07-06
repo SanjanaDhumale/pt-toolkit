@@ -3,7 +3,7 @@ package registry
 type Service struct {
 	Name        string
 	Container   string
-	Image        string
+	Image       string
 	Description string
 
 	Version      string
@@ -18,7 +18,7 @@ var ToolRegistry = map[string][]Service{
 		{
 			Name:        "JMeter",
 			Container:   "pt-jmeter",
-			Image:       "pt-jmeter:v1",
+			Image:       "pt-jmeter-enterprise:v1",
 			Description: "Apache JMeter",
 		},
 		{

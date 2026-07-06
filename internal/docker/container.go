@@ -40,6 +40,10 @@ func RunContainer(
 		"--network", network,
 	}
 
+	for _, volume := range volumes {
+		args = append(args, "-v", volume)
+	}
+
 	for _, v := range volumes {
 		args = append(args, "-v", v)
 	}
@@ -58,7 +62,6 @@ func RunContainer(
 func StartContainer(name, image string) error {
 	return RunContainer(name, image, "bridge", nil)
 }
-
 
 func ContainerRunning(name string) bool {
 

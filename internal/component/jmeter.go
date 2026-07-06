@@ -16,7 +16,7 @@ func (JMeter) Check() Result {
 		"docker",
 		"image",
 		"inspect",
-		"pt-jmeter:v1",
+		"pt-jmeter-enterprise:v1",
 	)
 
 	if err := cmd.Run(); err != nil {
@@ -40,7 +40,7 @@ func (JMeter) Install() Result {
 	cmd := exec.Command(
 		"docker",
 		"pull",
-		"pt-jmeter:v1",
+		"pt-jmeter-enterprise:v1",
 	)
 
 	if err := cmd.Run(); err != nil {

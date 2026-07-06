@@ -13,3 +13,4 @@ func ImageExists(image string) bool {
 
 	return cmd.Run() == nil
 }
+

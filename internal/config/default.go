@@ -19,7 +19,7 @@ func Default() Config {
 	// -------------------------
 
 	cfg.Tools.JMeter.Enabled = true
-	cfg.Tools.JMeter.Image = "pt-jmeter:v1"
+	cfg.Tools.JMeter.Image = "pt-jmeter-enterprise:v1"
 	cfg.Tools.JMeter.Container = "pt-jmeter"
 	cfg.Tools.JMeter.Version = "5.6.3"
 

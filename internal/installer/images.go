@@ -7,7 +7,7 @@ import (
 )
 
 var requiredImages = []string{
-	"pt-jmeter:v1",
+	"pt-jmeter-enterprise:v1",
 	"grafana/grafana:latest",
 	"prom/prometheus:latest",
 	"influxdb:2.7",
