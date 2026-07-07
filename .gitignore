@@ -1,0 +1,28 @@
+# ==========================
+# Build Outputs
+# ==========================
+build/
+backup/
+
+# Generated Reports
+reports/
+
+# Workspace Data
+workspace/
+
+# Release Packages
+releases/
+
+# Logs
+logs/
+*.log
+
+# Executables
+*.exe
+
+# VS Code
+.vscode/
+
+# OS Files
+Thumbs.db
+.DS_Store
