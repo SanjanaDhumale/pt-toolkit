@@ -1,7 +1,7 @@
 [Setup]
 AppId={{PTToolkit}}
 AppName=PT Toolkit
-AppVersion=1.0
+AppVersion=1.0.0
 AppPublisher=Sanjana Dhumale
 DefaultDirName={autopf}\PT Toolkit
 DefaultGroupName=PT Toolkit
@@ -35,3 +35,32 @@ Source: "..\releases\v1.0\docs\*"; DestDir: "{app}\docs"; Flags: ignoreversion r
 [Icons]
 Name: "{group}\PT Toolkit"; Filename: "{app}\ptctl.exe"
 Name: "{autodesktop}\PT Toolkit"; Filename: "{app}\ptctl.exe"; Tasks: desktopicon
+
+[Registry]
+
+; Add PT Toolkit installation folder to the system PATH
+Root: HKLM; \
+    Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; \
+    ValueType: expandsz; \
+    ValueName: "Path"; \
+    ValueData: "{olddata};{app}"; \
+    Check: NeedsAddPath('{app}')
+
+
+[Code]
+
+function NeedsAddPath(Path: string): Boolean;
+var
+    OrigPath: string;
+begin
+    if not RegQueryStringValue(
+        HKLM,
+        'SYSTEM\CurrentControlSet\Control\Session Manager\Environment',
+        'Path',
+        OrigPath)
+    then
+        OrigPath := '';
+
+    Result := Pos(';' + Uppercase(Path) + ';',
+        ';' + Uppercase(OrigPath) + ';') = 0;
+end;

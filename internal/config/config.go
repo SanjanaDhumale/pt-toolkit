@@ -2,8 +2,13 @@ package config
 
 type Config struct {
 	Toolkit struct {
-		Name    string `yaml:"name"`
-		Version string `yaml:"version"`
+		Name        string `yaml:"name"`
+		Version     string `yaml:"version"`
+		Description string `yaml:"description"`
+		Author      string `yaml:"author"`
+		Company     string `yaml:"company"`
+		Website     string `yaml:"website"`
+		License     string `yaml:"license"`
 	} `yaml:"toolkit"`
 
 	Docker struct {
@@ -18,49 +23,16 @@ type Config struct {
 	} `yaml:"workspace"`
 
 	Tools struct {
+		JMeter   Tool `yaml:"jmeter"`
+		K6       Tool `yaml:"k6"`
+		Selenium Tool `yaml:"selenium"`
+	} `yaml:"tools"`
 
-		JMeter struct {
-			Enabled   bool   `yaml:"enabled"`
-			Image     string `yaml:"image"`
-			Container string `yaml:"container"`
-			Version   string `yaml:"version"`
-		} `yaml:"jmeter"`
-
-		K6 struct {
-			Enabled bool   `yaml:"enabled"`
-			Image   string `yaml:"image"`
-		} `yaml:"k6"`
-
-		Selenium struct {
-			Enabled bool   `yaml:"enabled"`
-			Image   string `yaml:"image"`
-		} `yaml:"selenium"`
-	}
 	Monitoring struct {
 		Network string `yaml:"network"`
 
-		Grafana struct {
-			Enabled   bool   `yaml:"enabled"`
-			Image     string `yaml:"image"`
-			Container string `yaml:"container"`
-			Port      string `yaml:"port"`
-			Volume    string `yaml:"volume"`
-		} `yaml:"grafana"`
-
-		Prometheus struct {
-			Enabled   bool   `yaml:"enabled"`
-			Image     string `yaml:"image"`
-			Container string `yaml:"container"`
-			Port      string `yaml:"port"`
-			Volume    string `yaml:"volume"`
-		} `yaml:"prometheus"`
-
-		InfluxDB struct {
-			Enabled   bool   `yaml:"enabled"`
-			Image     string `yaml:"image"`
-			Container string `yaml:"container"`
-			Port      string `yaml:"port"`
-			Volume    string `yaml:"volume"`
-		} `yaml:"influxdb"`
+		Grafana    Service `yaml:"grafana"`
+		Prometheus Service `yaml:"prometheus"`
+		InfluxDB   Service `yaml:"influxdb"`
 	} `yaml:"monitoring"`
 }

@@ -15,9 +15,10 @@ func Show() {
 	fmt.Println("====================================")
 	fmt.Println()
 
-	fmt.Println("Version :", config.AppConfig.Toolkit.Version)
-	fmt.Println("Go      :", runtime.Version())
-	fmt.Println("OS      :", runtime.GOOS)
+	fmt.Printf("%-12s %s\n", "Version:", config.AppConfig.Toolkit.Version)
+	fmt.Printf("%-12s %s\n", "Build:", "Stable")
+	fmt.Printf("%-12s %s\n", "Go:", runtime.Version())
+	fmt.Printf("%-12s %s/%s\n", "Platform:", runtime.GOOS, runtime.GOARCH)
 	fmt.Println()
 
 	fmt.Println("Supported Services")

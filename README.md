@@ -12,12 +12,14 @@ v0.1
 - Docker Compose
 - Apache JMeter
 - Java 21
-- Python
+- Plugin Manager
+- CSV Generator
+- Grafana
+- Prometheus
+- Installer
 
 ## Future Scope
 
 - K6
-- Grafana
-- Prometheus
-- Plugin Manager
-- Installer
+- Python
+- Selenium
